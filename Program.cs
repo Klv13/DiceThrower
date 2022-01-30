@@ -1,49 +1,51 @@
 ﻿using System;
+using System.Linq;
 
-namespace NumberCracker
+namespace Teori
 {
     class Program
     {
         static void Main(string[] args)
         {
-           
-
-            
-
-            
-
-            Console.WriteLine("Enter passcode: ");
-
-            string Codes = Console.ReadLine();
-
-            int Code = int.Parse(Codes);
-
-            
-
-            int guess = 0;
+            Console.WriteLine("Input first size: ");
+            int terning = int.Parse(Console.ReadLine());
+            Console.WriteLine("Input second size: ");
+            int terning1 = int.Parse(Console.ReadLine());
+            int attemtps = 0;
+            int roll = 0;
+            int roll1 = 1;
+            int[] AttemtpsAry = new int[20000];
+            Random numGen = new Random();
 
 
-            while(guess != Code)
+            for (int i = 0; i < AttemtpsAry.Length; i++)
             {
-                Console.WriteLine(guess);
-                guess++;
-       
+                while (roll + roll1 != terning + terning1)
+                {
+                    roll = numGen.Next(1, terning + 1);
+                    roll1 = numGen.Next(1, terning1 + 1);
+
+                    Console.WriteLine(roll + " : " + roll1);
+
+                    attemtps++;
+                   
+
+                }
+
+                Console.WriteLine("Attempts: " + attemtps);
+                AttemtpsAry[i] = attemtps;
+                attemtps = 0;
+                roll = 0;
+                roll1 = 0;
             }
 
-            Console.WriteLine("Guess: " + guess);
-            Console.WriteLine("\n\nIf the digits in gues != in Code just put 0s infront");
+            double snit = Queryable.Average(AttemtpsAry.AsQueryable());
 
-            Console.WriteLine("The Actual input at start: " +Codes);
+            Console.WriteLine("Average attempts is: " + snit);
 
-            
 
-            
-
-            Console.ReadLine();
-            
+            Console.WriteLine("\n\n press any key to exit");
+            Console.ReadKey();
         }
-
-
-        
     }
 }
